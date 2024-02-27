@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
+import 'package:todo_app/tabs/home_tap.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = "HomeScreen";
@@ -14,6 +15,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xffdfecdb),
       appBar: AppBar(
         title: Text(
           "To Do List",
@@ -74,6 +76,8 @@ class _HomeScreenState extends State<HomeScreen> {
             )),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+
+      body: HomeTab(),
     );
   }
 }
