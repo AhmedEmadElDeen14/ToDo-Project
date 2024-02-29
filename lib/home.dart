@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
-import 'package:todo_app/tabs/home_tap.dart';
+import 'package:todo_app/tabs/home_tab.dart';
+import 'package:todo_app/tabs/settings_tab.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = "HomeScreen";
@@ -18,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: Color(0xffdfecdb),
       appBar: AppBar(
         title: Text(
-          "To Do List",
+          index == 0 ? "To Do List" : "Settings",
           style: TextStyle(
             color: Colors.white,
             fontSize: 22,
@@ -76,8 +77,12 @@ class _HomeScreenState extends State<HomeScreen> {
             )),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-
-      body: HomeTab(),
+      body: tabs[index],
     );
   }
+
+  List<Widget> tabs = [
+    HomeTab(),
+    SettingsTab(),
+  ];
 }
