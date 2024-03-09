@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:todo_app/edit_task.dart';
 
 class TaskCard extends StatefulWidget {
   String title = "";
@@ -46,7 +47,9 @@ class _TaskCardState extends State<TaskCard> {
           children: [
             Container(
               child: SlidableAction(
-                onPressed: (context) {},
+                onPressed: (context) {
+                  Navigator.of(context).pushNamed(EditTask.routeName);
+                },
                 backgroundColor: Color(0xFF5D9CEC),
                 foregroundColor: Colors.white,
                 icon: Icons.edit,

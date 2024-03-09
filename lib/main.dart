@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/edit_task.dart';
 import 'package:todo_app/home.dart';
 import 'package:todo_app/splash.dart';
 
@@ -18,6 +19,7 @@ class MyApp extends StatelessWidget {
       routes: {
         SplashScreen.routeName:(context)=>SplashScreen(),
         HomeScreen.routeName :  (context) => HomeScreen(),
+        EditTask.routeName :  (context) => EditTask(),
       },
     );
   }

@@ -69,19 +69,25 @@ class _AddTaskSheetState extends State<AddTaskSheet> {
                   onTap: () {
                     selectTaskDate();
                   },
-                  child: Text("${selectedDate.toString().substring(0, 10)}",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.w700)),
+                  child: Text(
+                    "${selectedDate.toString().substring(0, 10)}",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                      color: Color(
+                        0xffA9A9A9,
+                      ),
+                    ),
+                  ),
                 ),
                 SizedBox(
                   height: 25,
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    if(_formKey.currentState!.validate()){
+                    if (_formKey.currentState!.validate()) {
                       Navigator.pop(context);
                     }
-
                   },
                   child: Text("Add"),
                 )
