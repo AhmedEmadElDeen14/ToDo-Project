@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
+import 'package:todo_app/sheets/add_task_sheet.dart';
 import 'package:todo_app/tabs/home_tab.dart';
 import 'package:todo_app/tabs/settings_tab.dart';
 
@@ -62,7 +63,21 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            isScrollControlled: true,
+            builder: (context) {
+              return Container(
+                height: MediaQuery.of(context).size.height * .7,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(25)),
+                child: AddTaskSheet(),
+              );
+            },
+          );
+        },
         child: Icon(
           Icons.add,
           color: Colors.white,
