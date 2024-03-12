@@ -45,6 +45,10 @@ class FirebaseFunctions {
     return docRef.update(taskMap);
   }
 
+  static void deleteTask(String id){
+    getTaskCollection().doc(id).delete();
+  }
+
 
   static CollectionReference<UserModel> getUserCollection() {
     return FirebaseFirestore.instance.collection("Users").withConverter(

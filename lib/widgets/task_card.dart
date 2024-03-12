@@ -36,7 +36,9 @@ class _TaskCardState extends State<TaskCard> {
           children: [
             Container(
               child: SlidableAction(
-                onPressed: (context) {},
+                onPressed: (context) {
+                  FirebaseFunctions.deleteTask(widget.taskModel.id);
+                },
                 backgroundColor: Color(0xFFFE4A49),
                 foregroundColor: Colors.white,
                 icon: Icons.delete,
