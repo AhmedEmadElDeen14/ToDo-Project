@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/auth/auth.dart';
 import 'package:todo_app/edit_task.dart';
 import 'package:todo_app/home.dart';
 import 'package:todo_app/splash.dart';
@@ -21,11 +22,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: SplashScreen.routeName,
+      initialRoute: AuthScreen.routeName,
       routes: {
         SplashScreen.routeName: (context) => SplashScreen(),
         HomeScreen.routeName: (context) => HomeScreen(),
         EditTask.routeName: (context) => EditTask(),
+        AuthScreen.routeName: (context) => AuthScreen(),
       },
     );
   }
