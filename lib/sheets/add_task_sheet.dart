@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/firebase_functions.dart';
+import 'package:todo_app/task-model.dart';
 
 class AddTaskSheet extends StatefulWidget {
   @override
@@ -7,11 +9,8 @@ class AddTaskSheet extends StatefulWidget {
 
 class _AddTaskSheetState extends State<AddTaskSheet> {
   final _formKey = GlobalKey<FormState>();
-
   var selectedDate = DateTime.now();
-
   var titleController = TextEditingController();
-
   var descriptionController = TextEditingController();
 
   @override
@@ -31,6 +30,7 @@ class _AddTaskSheetState extends State<AddTaskSheet> {
                 Container(
                   margin: EdgeInsets.symmetric(vertical: 20),
                   child: TextFormField(
+                    controller: titleController,
                     decoration: InputDecoration(
                         hintText: "Enter your task",
                         hintStyle: TextStyle(color: Color(0xffA9A9A9))),
@@ -45,6 +45,7 @@ class _AddTaskSheetState extends State<AddTaskSheet> {
                 Container(
                     margin: EdgeInsets.symmetric(vertical: 20),
                     child: TextFormField(
+                      controller: descriptionController,
                       decoration: InputDecoration(
                           hintText: "Enter your description",
                           hintStyle: TextStyle(color: Color(0xffA9A9A9))),
@@ -86,6 +87,12 @@ class _AddTaskSheetState extends State<AddTaskSheet> {
                 ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
+                      TaskModel taskModel = TaskModel(
+                        title: titleController.text,
+                        description: descriptionController.text,
+                        date: DateUtils.dateOnly(selectedDate).millisecond,
+                      );
+                      FirebaseFunctions.addTask(taskModel);
                       Navigator.pop(context);
                     }
                   },
