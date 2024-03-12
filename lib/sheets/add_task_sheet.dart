@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_app/firebase_functions.dart';
 import 'package:todo_app/task-model.dart';
@@ -88,9 +89,10 @@ class _AddTaskSheetState extends State<AddTaskSheet> {
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       TaskModel taskModel = TaskModel(
+                        userId: FirebaseAuth.instance.currentUser!.uid,
                         title: titleController.text,
                         description: descriptionController.text,
-                        date: DateUtils.dateOnly(selectedDate).millisecond,
+                        date: DateUtils.dateOnly(selectedDate).millisecondsSinceEpoch,
                       );
                       FirebaseFunctions.addTask(taskModel);
                       Navigator.pop(context);

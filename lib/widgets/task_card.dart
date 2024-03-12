@@ -14,17 +14,6 @@ class TaskCard extends StatefulWidget {
 }
 
 class _TaskCardState extends State<TaskCard> {
-  Color mainColor = const Color(0xff5D9CEC);
-
-  @override
-  void initState() {
-    if (widget.taskModel.isDone) {
-      mainColor = Color(0xff61E757);
-    } else {
-      mainColor = Color(0xff5D9CEC);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -86,7 +75,9 @@ class _TaskCardState extends State<TaskCard> {
                     height: 60,
                     width: 5,
                     decoration: BoxDecoration(
-                        color: mainColor,
+                        color: widget.taskModel.isDone
+                            ? Color(0xff61E757)
+                            : Color(0xff5D9CEC),
                         borderRadius: BorderRadius.circular(25)),
                   ),
                   Container(
@@ -99,7 +90,9 @@ class _TaskCardState extends State<TaskCard> {
                           style: TextStyle(
                             fontSize: 21,
                             fontWeight: FontWeight.w700,
-                            color: mainColor,
+                            color: widget.taskModel.isDone
+                                ? Color(0xff61E757)
+                                : Color(0xff5D9CEC),
                           ),
                         ),
                         Text("${widget.taskModel.description}"),
@@ -111,7 +104,6 @@ class _TaskCardState extends State<TaskCard> {
               InkWell(
                 onTap: () {
                   widget.taskModel.isDone = true;
-                  mainColor = Color(0xff61E757);
                   FirebaseFunctions.editTask(widget.taskModel);
                   setState(() {});
                 },

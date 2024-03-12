@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
+import 'package:todo_app/auth/auth.dart';
 import 'package:todo_app/sheets/add_task_sheet.dart';
 import 'package:todo_app/tabs/home_tab.dart';
 import 'package:todo_app/tabs/settings_tab.dart';
@@ -27,6 +29,18 @@ class _HomeScreenState extends State<HomeScreen> {
             fontWeight: FontWeight.w700,
           ),
         ),
+        actions: [
+          InkWell(
+            onTap: () {
+              FirebaseAuth.instance.signOut();
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                  AuthScreen.routeName, (route) => false);
+            },
+            child: Container(
+                margin: EdgeInsets.only(right: 10),
+                child: Icon(Icons.logout, color: Colors.white)),
+          )
+        ],
         backgroundColor: Color(0xff5D9CEC),
       ),
       bottomNavigationBar: BottomAppBar(

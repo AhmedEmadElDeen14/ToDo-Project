@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_app/firebase_functions.dart';
 import 'package:todo_app/home.dart';
@@ -132,6 +133,7 @@ class _EditTaskState extends State<EditTask> {
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {
                                   TaskModel taskModel = TaskModel(
+                                    userId: FirebaseAuth.instance.currentUser!.uid,
                                     id: taskId,
                                     title: titleController.text,
                                     description: descriptionController.text,

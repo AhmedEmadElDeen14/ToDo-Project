@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:todo_app/task-model.dart';
 import 'package:todo_app/user_model.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -18,8 +19,13 @@ class FirebaseFunctions {
     );
   }
 
-  static Stream<QuerySnapshot<TaskModel>> getTasks() {
-    return getTaskCollection().snapshots();
+  static Stream<QuerySnapshot<TaskModel>> getTasks(DateTime date) {
+    return getTaskCollection()
+        .where("date",
+            isEqualTo: DateUtils.dateOnly(date).millisecondsSinceEpoch)
+        .where("userId", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .orderBy("title")
+        .snapshots();
   }
 
   static Future<void> addTask(TaskModel taskModel) {
@@ -67,14 +73,15 @@ class FirebaseFunctions {
 
   static login(String email, String password, Function onSuccess,
       Function onError) async {
-    try{
+    try {
       final credential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
       onSuccess();
-    }on FirebaseAuthException catch(e){
+    } on FirebaseAuthException catch (e) {
       onError(e.code);
     }
   }
+
 
   static createAccount(String userName, String phone, String email,
       String password, Function onSuccess, Function onError) async {
@@ -117,5 +124,4 @@ class FirebaseFunctions {
     // Once signed in, return the UserCredential
     return await FirebaseAuth.instance.signInWithCredential(credential);
   }
-
 }
