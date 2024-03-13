@@ -124,4 +124,11 @@ class FirebaseFunctions {
     // Once signed in, return the UserCredential
     return await FirebaseAuth.instance.signInWithCredential(credential);
   }
+
+  static Future<UserModel?> readUser() async{
+    String id = FirebaseAuth.instance.currentUser!.uid;
+    DocumentSnapshot<UserModel> snap = await getUserCollection().doc(id).get();
+    return snap.data();
+  }
+
 }

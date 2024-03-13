@@ -139,9 +139,9 @@ class _EditTaskState extends State<EditTask> {
                                     description: descriptionController.text,
                                     date: DateUtils
                                         .dateOnly(selectedDate)
-                                        .millisecond,);
+                                        .millisecondsSinceEpoch,);
                                   FirebaseFunctions.editTask(taskModel);
-                                  Navigator.pushNamed(context, HomeScreen.routeName);
+                                  Navigator.pushNamedAndRemoveUntil(context, HomeScreen.routeName,(route) => false,);
                                 }
                               },
                               style: ButtonStyle(
