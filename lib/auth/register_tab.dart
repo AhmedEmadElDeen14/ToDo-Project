@@ -140,7 +140,9 @@ class RegisterTab extends StatelessWidget {
                 ),
                 InkWell(
                     onTap: () {
-                      FirebaseFunctions.signInWithGoogle();
+                      // FirebaseFunctions.signInWithGoogle();
+                      // Navigator.pushNamedAndRemoveUntil(
+                      //     context, HomeScreen.routeName, (route) => false);
                     },
                     child: Image(
                       image: AssetImage("assets/images/google-logo.png"),

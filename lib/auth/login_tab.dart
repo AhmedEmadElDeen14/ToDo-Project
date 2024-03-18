@@ -59,9 +59,10 @@ class LoginTab extends StatelessWidget {
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           FirebaseFunctions.login(
-                              emailController.text, passwordController.text, () {
-                            Navigator.pushNamedAndRemoveUntil(
-                                context, HomeScreen.routeName, (route) => false);
+                              emailController.text, passwordController.text,
+                              () {
+                            Navigator.pushNamedAndRemoveUntil(context,
+                                HomeScreen.routeName, (route) => false);
                           }, (message) {
                             showDialog(
                               context: context,
@@ -107,7 +108,31 @@ class LoginTab extends StatelessWidget {
             ),
             InkWell(
                 onTap: () {
-                  FirebaseFunctions.signInWithGoogle();
+                  FirebaseFunctions.signInWithGoogle(
+                    () {
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, HomeScreen.routeName, (route) => false);
+                    },
+                    (message) {
+                      showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: Text("Error"),
+                            content: Text(message),
+                            actions: [
+                              ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text("Ok"))
+                            ],
+                          );
+                        },
+                      );
+                    },
+                  );
                 },
                 child: Image(
                   image: AssetImage("assets/images/google-logo.png"),
